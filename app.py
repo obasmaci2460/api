@@ -41,4 +41,4 @@ def get_data():
 
 # API'yi çalıştır
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)  # Sunucuyu dış IP'lerden erişilebilir hale getiriyoruz
+    app.run(debug=True, host='0.0.0.0')  # Sunucuyu dış IP'lerden erişilebilir hale getiriyoruz
