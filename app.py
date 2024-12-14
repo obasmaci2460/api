@@ -8,12 +8,19 @@ app = Flask(__name__)
 # CORS ayarları
 cors = CORS(app, resources={r"/*": {"origins": "*"}})  # Her yerden gelen isteklere izin verir
 
-# Windows Authentication ile MSSQL Bağlantısı yapan fonksiyon
+# SQL Server Authentication ile MSSQL Bağlantısı yapan fonksiyon
 def get_db_connection():
     try:
-        server = 'DESKTOP-G6ATIH2\\SQLEXPRESS'  # Yerel bağlantınız
-        database = 'OgrenciDB'
-        conn = pyodbc.connect(f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};Trusted_Connection=yes')
+        # SQL Server Authentication kullanmak için
+        server = '10.91.117.11\\SQLEXPRESS'  # SQL Server'ın sunucu adı
+        database = 'OgrenciDB'  # Veritabanı adı
+        username = 'omer12'  # SQL Server kullanıcı adı
+        password = '11562032460'  # SQL Server şifresi
+        
+        # Bağlantı dizesini SQL Server Authentication'a göre ayarlıyoruz
+        conn = pyodbc.connect(f'DRIVER={{ODBC Driver 17 for SQL Server}};'
+                              f'SERVER={server};DATABASE={database};'
+                              f'UID={username};PWD={password}')
         return conn  # Bağlantıyı döndür
     except pyodbc.Error as e:
         return None  # Bağlantı hatasında None döndür
